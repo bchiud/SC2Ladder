@@ -1,0 +1,341 @@
+{
+  "currentSeason" : [ {
+    "ladder" : [ ],
+    "characters" : [ {
+      "id" : 338704,
+      "realm" : 1,
+      "displayName" : "Duplicity",
+      "clanName" : "OverKlocked",
+      "clanTag" : "Ok",
+      "profilePath" : "/profile/338704/1/Duplicity/"
+    }, {
+      "id" : 4014615,
+      "realm" : 1,
+      "displayName" : "LieZ",
+      "clanName" : "",
+      "clanTag" : "",
+      "profilePath" : "/profile/4014615/1/LieZ/"
+    }, {
+      "id" : 20604767,
+      "realm" : 1,
+      "displayName" : "StyX",
+      "clanName" : "OverKlocked",
+      "clanTag" : "Ok",
+      "profilePath" : "/profile/20604767/1/StyX/"
+    } ],
+    "nonRanked" : [ {
+      "mmq" : "LOTV_THREES",
+      "gamesPlayed" : 2
+    } ]
+  }, {
+    "ladder" : [ ],
+    "characters" : [ {
+      "id" : 4014615,
+      "realm" : 1,
+      "displayName" : "LieZ",
+      "clanName" : "",
+      "clanTag" : "",
+      "profilePath" : "/profile/4014615/1/LieZ/"
+    }, {
+      "id" : 20604767,
+      "realm" : 1,
+      "displayName" : "StyX",
+      "clanName" : "OverKlocked",
+      "clanTag" : "Ok",
+      "profilePath" : "/profile/20604767/1/StyX/"
+    } ],
+    "nonRanked" : [ {
+      "mmq" : "LOTV_TWOS",
+      "gamesPlayed" : 3
+    } ]
+  }, {
+    "ladder" : [ ],
+    "characters" : [ {
+      "id" : 4014615,
+      "realm" : 1,
+      "displayName" : "LieZ",
+      "clanName" : "",
+      "clanTag" : "",
+      "profilePath" : "/profile/4014615/1/LieZ/"
+    } ],
+    "nonRanked" : [ ]
+  }, {
+    "ladder" : [ {
+      "ladderName" : "Akilae Kappa",
+      "ladderId" : 264387,
+      "division" : 196,
+      "rank" : 21,
+      "league" : "DIAMOND",
+      "matchMakingQueue" : "LOTV_SOLO",
+      "wins" : 44,
+      "losses" : 45,
+      "showcase" : true
+    } ],
+    "characters" : [ {
+      "id" : 4014615,
+      "realm" : 1,
+      "displayName" : "LieZ",
+      "clanName" : "",
+      "clanTag" : "",
+      "profilePath" : "/profile/4014615/1/LieZ/"
+    } ],
+    "nonRanked" : [ ]
+  }, {
+    "ladder" : [ ],
+    "characters" : [ {
+      "id" : 4014615,
+      "realm" : 1,
+      "displayName" : "LieZ",
+      "clanName" : "",
+      "clanTag" : "",
+      "profilePath" : "/profile/4014615/1/LieZ/"
+    } ],
+    "nonRanked" : [ ]
+  }, {
+    "ladder" : [ {
+      "ladderName" : "Warbringer Dixie",
+      "ladderId" : 263738,
+      "division" : 5,
+      "rank" : 2,
+      "league" : "MASTER",
+      "matchMakingQueue" : "LOTV_TWOS",
+      "wins" : 168,
+      "losses" : 139,
+      "showcase" : true
+    } ],
+    "characters" : [ {
+      "id" : 4014615,
+      "realm" : 1,
+      "displayName" : "LieZ",
+      "clanName" : "",
+      "clanTag" : "",
+      "profilePath" : "/profile/4014615/1/LieZ/"
+    } ],
+    "nonRanked" : [ ]
+  }, {
+    "ladder" : [ ],
+    "characters" : [ {
+      "id" : 2686114,
+      "realm" : 1,
+      "displayName" : "Nemesis",
+      "clanName" : "Nembot",
+      "clanTag" : "Nembot",
+      "profilePath" : "/profile/2686114/1/Nemesis/"
+    }, {
+      "id" : 4014615,
+      "realm" : 1,
+      "displayName" : "LieZ",
+      "clanName" : "",
+      "clanTag" : "",
+      "profilePath" : "/profile/4014615/1/LieZ/"
+    }, {
+      "id" : 20604767,
+      "realm" : 1,
+      "displayName" : "StyX",
+      "clanName" : "OverKlocked",
+      "clanTag" : "Ok",
+      "profilePath" : "/profile/20604767/1/StyX/"
+    } ],
+    "nonRanked" : [ {
+      "mmq" : "LOTV_THREES",
+      "gamesPlayed" : 1
+    } ]
+  }, {
+    "ladder" : [ {
+      "ladderName" : "Nagglfar Upsilon",
+      "ladderId" : 264821,
+      "division" : 7,
+      "rank" : 35,
+      "league" : "PLATINUM",
+      "matchMakingQueue" : "LOTV_FOURS",
+      "wins" : 6,
+      "losses" : 0,
+      "showcase" : true
+    } ],
+    "characters" : [ {
+      "id" : 2686114,
+      "realm" : 1,
+      "displayName" : "Nemesis",
+      "clanName" : "Nembot",
+      "clanTag" : "Nembot",
+      "profilePath" : "/profile/2686114/1/Nemesis/"
+    }, {
+      "id" : 4014615,
+      "realm" : 1,
+      "displayName" : "LieZ",
+      "clanName" : "",
+      "clanTag" : "",
+      "profilePath" : "/profile/4014615/1/LieZ/"
+    }, {
+      "id" : 8721805,
+      "realm" : 1,
+      "displayName" : "PrOTeCh",
+      "clanName" : "FANXY CHILD",
+      "clanTag" : "FANXY",
+      "profilePath" : "/profile/8721805/1/PrOTeCh/"
+    }, {
+      "id" : 20604767,
+      "realm" : 1,
+      "displayName" : "StyX",
+      "clanName" : "OverKlocked",
+      "clanTag" : "Ok",
+      "profilePath" : "/profile/20604767/1/StyX/"
+    } ],
+    "nonRanked" : [ ]
+  } ],
+  "previousSeason" : [ {
+    "ladder" : [ ],
+    "characters" : [ {
+      "id" : 4014615,
+      "realm" : 1,
+      "displayName" : "LieZ",
+      "clanName" : "",
+      "clanTag" : "",
+      "profilePath" : "/profile/4014615/1/LieZ/"
+    } ],
+    "nonRanked" : [ ]
+  }, {
+    "ladder" : [ ],
+    "characters" : [ {
+      "id" : 4014615,
+      "realm" : 1,
+      "displayName" : "LieZ",
+      "clanName" : "",
+      "clanTag" : "",
+      "profilePath" : "/profile/4014615/1/LieZ/"
+    } ],
+    "nonRanked" : [ ]
+  }, {
+    "ladder" : [ ],
+    "characters" : [ {
+      "id" : 3501713,
+      "realm" : 1,
+      "displayName" : "Brutalisk",
+      "clanName" : "But Fxckers",
+      "clanTag" : "ButFkr",
+      "profilePath" : "/profile/3501713/1/Brutalisk/"
+    }, {
+      "id" : 4014615,
+      "realm" : 1,
+      "displayName" : "LieZ",
+      "clanName" : "",
+      "clanTag" : "",
+      "profilePath" : "/profile/4014615/1/LieZ/"
+    } ],
+    "nonRanked" : [ ]
+  }, {
+    "ladder" : [ ],
+    "characters" : [ {
+      "id" : 2223035,
+      "realm" : 1,
+      "displayName" : "GreeneChron",
+      "clanName" : "",
+      "clanTag" : "",
+      "profilePath" : "/profile/2223035/1/GreeneChron/"
+    }, {
+      "id" : 4014615,
+      "realm" : 1,
+      "displayName" : "LieZ",
+      "clanName" : "",
+      "clanTag" : "",
+      "profilePath" : "/profile/4014615/1/LieZ/"
+    } ],
+    "nonRanked" : [ ]
+  }, {
+    "ladder" : [ ],
+    "characters" : [ {
+      "id" : 2163507,
+      "realm" : 1,
+      "displayName" : "JFlo",
+      "clanName" : "Images of Victory",
+      "clanTag" : "IOV",
+      "profilePath" : "/profile/2163507/1/JFlo/"
+    }, {
+      "id" : 4014615,
+      "realm" : 1,
+      "displayName" : "LieZ",
+      "clanName" : "",
+      "clanTag" : "",
+      "profilePath" : "/profile/4014615/1/LieZ/"
+    } ],
+    "nonRanked" : [ ]
+  } ],
+  "showcasePlacement" : [ {
+    "ladder" : [ ],
+    "characters" : [ {
+      "id" : 338704,
+      "realm" : 1,
+      "displayName" : "Duplicity",
+      "clanName" : "OverKlocked",
+      "clanTag" : "Ok",
+      "profilePath" : "/profile/338704/1/Duplicity/"
+    }, {
+      "id" : 4014615,
+      "realm" : 1,
+      "displayName" : "LieZ",
+      "clanName" : "",
+      "clanTag" : "",
+      "profilePath" : "/profile/4014615/1/LieZ/"
+    }, {
+      "id" : 20604767,
+      "realm" : 1,
+      "displayName" : "StyX",
+      "clanName" : "OverKlocked",
+      "clanTag" : "Ok",
+      "profilePath" : "/profile/20604767/1/StyX/"
+    } ],
+    "nonRanked" : [ {
+      "mmq" : "LOTV_THREES",
+      "gamesPlayed" : 2
+    } ]
+  }, {
+    "ladder" : [ ],
+    "characters" : [ {
+      "id" : 4014615,
+      "realm" : 1,
+      "displayName" : "LieZ",
+      "clanName" : "",
+      "clanTag" : "",
+      "profilePath" : "/profile/4014615/1/LieZ/"
+    }, {
+      "id" : 20604767,
+      "realm" : 1,
+      "displayName" : "StyX",
+      "clanName" : "OverKlocked",
+      "clanTag" : "Ok",
+      "profilePath" : "/profile/20604767/1/StyX/"
+    } ],
+    "nonRanked" : [ {
+      "mmq" : "LOTV_TWOS",
+      "gamesPlayed" : 3
+    } ]
+  }, {
+    "ladder" : [ ],
+    "characters" : [ {
+      "id" : 2686114,
+      "realm" : 1,
+      "displayName" : "Nemesis",
+      "clanName" : "Nembot",
+      "clanTag" : "Nembot",
+      "profilePath" : "/profile/2686114/1/Nemesis/"
+    }, {
+      "id" : 4014615,
+      "realm" : 1,
+      "displayName" : "LieZ",
+      "clanName" : "",
+      "clanTag" : "",
+      "profilePath" : "/profile/4014615/1/LieZ/"
+    }, {
+      "id" : 20604767,
+      "realm" : 1,
+      "displayName" : "StyX",
+      "clanName" : "OverKlocked",
+      "clanTag" : "Ok",
+      "profilePath" : "/profile/20604767/1/StyX/"
+    } ],
+    "nonRanked" : [ {
+      "mmq" : "LOTV_THREES",
+      "gamesPlayed" : 1
+    } ]
+  } ]
+}

@@ -1,0 +1,34 @@
+# Eclipse
+.classpath
+.project
+.settings
+eclipsebin
+
+# Idea
+.idea
+*.iml
+*.ipr
+*.iws
+annotations
+classes
+
+# Gradle
+.gradle
+build
+gradlew.bat
+local.properties
+
+# Maven
+pom.xml.*
+release.properties
+target
+
+# Build
+bin
+gen
+lib
+obj
+out
+
+#MacOS
+.DS_Store
