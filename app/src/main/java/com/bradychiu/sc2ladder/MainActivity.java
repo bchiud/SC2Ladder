@@ -3,6 +3,15 @@ package com.bradychiu.sc2ladder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+import com.bradychiu.sc2ladder.model.achievements.AchievementList;
+import com.bradychiu.sc2ladder.model.ladder.Ladder;
+import com.bradychiu.sc2ladder.model.ladders.Ladders;
+import com.bradychiu.sc2ladder.model.matchHistory.MatchHistory;
+import com.bradychiu.sc2ladder.model.profile.Profile;
+import com.bradychiu.sc2ladder.model.rewards.Rewards;
+import com.bradychiu.sc2ladder.utils.BnetApi;
+import com.bradychiu.sc2ladder.utils.ConfigService;
+import model.Config;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -11,28 +20,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        System.out.println("asdf");
         TextView tvMain = (TextView) findViewById(R.id.tv_main);
         tvMain.setText("");
 
-        // model.Config config = utils.ConfigService.ConfigService();
+        Config config = ConfigService.ConfigService(getBaseContext());
+
+        BnetApi<Profile> profile = new BnetApi<Profile>(Profile.class, config);
+        tvMain.append(profile.callApi().toString());
         //
-        // utils.BnetApi<model.profile.Profile> profile = new utils.BnetApi<model.profile.Profile>(model.profile.Profile.class, config);
-        // tvMain.append(profile.callApi().toString());
-        //
-        // utils.BnetApi<model.ladders.Ladders> ladders = new utils.BnetApi<model.ladders.Ladders>(model.ladders.Ladders.class, config);
+        // BnetApi<Ladders> ladders = new BnetApi<Ladders>(Ladders.class, config);
         // tvMain.append(ladders.callApi().toString());
         //
-        // utils.BnetApi<model.matchHistory.MatchHistory> matchHistory = new utils.BnetApi<model.matchHistory.MatchHistory>(model.matchHistory.MatchHistory.class, config);
+        // BnetApi<MatchHistory> matchHistory = new BnetApi<MatchHistory>(MatchHistory.class, config);
         // tvMain.append(matchHistory.callApi().toString());
         //
-        // utils.BnetApi<model.ladder.Ladder> ladder = new utils.BnetApi<model.ladder.Ladder>(model.ladder.Ladder.class, config);
+        // BnetApi<Ladder> ladder = new BnetApi<Ladder>(Ladder.class, config);
         // tvMain.append(ladder.callApi().toString());
         //
-        // utils.BnetApi<model.achievements.AchievementList> achievements = new utils.BnetApi<model.achievements.AchievementList>(model.achievements.AchievementList.class, config);
+        // BnetApi<AchievementList> achievements = new BnetApi<AchievementList>(AchievementList.class, config);
         // tvMain.append(achievements.callApi().toString());
         //
-        // utils.BnetApi<model.rewards.Rewards> rewards = new utils.BnetApi<model.rewards.Rewards>(model.rewards.Rewards.class, config);
+        // BnetApi<Rewards> rewards = new BnetApi<Rewards>(Rewards.class, config);
         // tvMain.append(rewards.callApi().toString());
     }
 }

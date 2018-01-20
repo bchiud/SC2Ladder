@@ -1,23 +1,28 @@
 package com.bradychiu.sc2ladder.utils;
 
+import android.content.Context;
+import android.content.res.AssetManager;
+import android.os.health.SystemHealthManager;
+import android.provider.Settings;
 import model.Config;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+
+import java.io.*;
 import java.util.Properties;
 
 public class ConfigService {
 
-    public static Config ConfigService() {
-        InputStream in = null;
+    public static Config ConfigService(Context context) {
+
         Properties prop = new Properties();
 
         try {
-            in = new FileInputStream("config.properties");
-            prop.load(in);
+            AssetManager am = context.getAssets();
+            prop.load(am.open("config.properties"));
         } catch(IOException ioe) {
             ioe.printStackTrace();
         }
+
+        System.out.println(prop.getProperty("apiKey"));
 
         Config config = Config.builder()
                 .setApiKey(prop.getProperty("apiKey"))
@@ -29,6 +34,8 @@ public class ConfigService {
                 .setRegion(prop.getProperty("region"))
                 .setRealmNumber(Integer.valueOf(prop.getProperty("realmNumber")))
                 .build();
+
+        System.out.println(config.apiKey());
 
         return config;
     }
