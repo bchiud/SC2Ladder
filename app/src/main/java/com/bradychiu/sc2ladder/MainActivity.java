@@ -13,6 +13,8 @@ import com.bradychiu.sc2ladder.utils.BnetApi;
 import com.bradychiu.sc2ladder.utils.ConfigService;
 import model.Config;
 
+import java.util.concurrent.ExecutionException;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -26,7 +28,13 @@ public class MainActivity extends AppCompatActivity {
         Config config = ConfigService.ConfigService(getBaseContext());
 
         BnetApi<Profile> profile = new BnetApi<Profile>(Profile.class, config);
-        tvMain.append(profile.callApi().toString());
+        profile.execute();
+        try {
+            tvMain.append(profile.get().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         //
         // BnetApi<Ladders> ladders = new BnetApi<Ladders>(Ladders.class, config);
         // tvMain.append(ladders.callApi().toString());
@@ -42,5 +50,6 @@ public class MainActivity extends AppCompatActivity {
         //
         // BnetApi<Rewards> rewards = new BnetApi<Rewards>(Rewards.class, config);
         // tvMain.append(rewards.callApi().toString());
+
     }
 }

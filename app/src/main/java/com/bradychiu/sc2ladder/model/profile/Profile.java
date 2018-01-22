@@ -15,7 +15,6 @@ import org.jetbrains.annotations.Nullable;
 @AutoValue
 public abstract class Profile {
 
-    // TODO: best way to handle deeply nested auto value?
     @Json(name = "id") public abstract int id();
     @Json(name = "realm") public abstract int realm();
     @Json(name = "displayName") public abstract String displayName();

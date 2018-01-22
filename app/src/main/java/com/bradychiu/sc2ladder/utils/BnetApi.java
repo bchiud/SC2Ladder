@@ -1,5 +1,6 @@
 package com.bradychiu.sc2ladder.utils;
 
+import android.os.AsyncTask;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 import model.Config;
@@ -11,17 +12,22 @@ import java.io.IOException;
 import java.net.URL;
 
 
-public class BnetApi<T> {
+public class BnetApi<T> extends AsyncTask<Void, Void, T> {
 
     private Class<T> clazz;
     private Config config;
+    private T finalResult;
 
     public BnetApi(Class<T> clazz, Config config) {
         this.clazz = clazz;
         this.config = config;
     }
 
-    public T callApi() {
+    @Override
+    public void onPreExecute() {}
+
+    @Override
+    public T doInBackground(Void... params) {
 
         /*
         okhttp to make connect
@@ -36,7 +42,7 @@ public class BnetApi<T> {
                 .host(config.region() + ".api.battle.net")
                 .addPathSegment(config.game());
 
-        switch(clazz.getName().replaceAll("^model\\.(\\w*\\.)?", "")) {
+        switch(clazz.getName().replaceAll("^.*model\\.(\\w*\\.)?", "")) {
             case "Profile": // https://us.api.battle.net/sc2/profile/4014615/1/LieZ/?locale=en_US&apikey=
                 urlBuilder.addPathSegment("profile")
                         .addPathSegment(config.profileNumber().toString())
@@ -98,14 +104,19 @@ public class BnetApi<T> {
                 .build();
         JsonAdapter<T> jsonAdapter = moshi.adapter(clazz);
 
-        T tOut = null;
         try {
-            tOut = jsonAdapter.fromJson(results);
+            finalResult = jsonAdapter.fromJson(results);
         } catch(IOException ioe) {
             ioe.printStackTrace();
         }
 
-        return tOut;
+        System.out.println("DIB End");
+
+        return finalResult;
 
     }
+
+    @Override
+    public void onPostExecute(T t) { }
+
 }
