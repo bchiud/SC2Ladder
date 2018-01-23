@@ -1,6 +1,5 @@
 package com.bradychiu.sc2ladder;
 
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -13,6 +12,7 @@ import com.bradychiu.sc2ladder.model.ladders.Ladders;
 import com.bradychiu.sc2ladder.model.matchHistory.MatchHistory;
 import com.bradychiu.sc2ladder.model.profile.Profile;
 import com.bradychiu.sc2ladder.model.rewards.Rewards;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
