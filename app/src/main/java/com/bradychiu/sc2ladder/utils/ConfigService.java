@@ -2,11 +2,8 @@ package com.bradychiu.sc2ladder.utils;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.os.health.SystemHealthManager;
-import android.provider.Settings;
-import model.Config;
-
-import java.io.*;
+import com.bradychiu.sc2ladder.model.Config;
+import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigService {

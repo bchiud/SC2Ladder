@@ -3,7 +3,7 @@ package com.bradychiu.sc2ladder.utils;
 import android.os.AsyncTask;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
-import model.Config;
+import com.bradychiu.sc2ladder.model.Config;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -81,7 +81,7 @@ public class BnetApi<T> extends AsyncTask<Void, Void, T> {
                 .build()
                 .url();
 
-        System.out.println(url.toString());
+        // System.out.println(url.toString());
 
         // https://dev.battle.net/io-docs
         Request request = new Request.Builder()
@@ -109,8 +109,6 @@ public class BnetApi<T> extends AsyncTask<Void, Void, T> {
         } catch(IOException ioe) {
             ioe.printStackTrace();
         }
-
-        System.out.println("DIB End");
 
         return finalResult;
 

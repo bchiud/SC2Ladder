@@ -1,4 +1,4 @@
-package model;
+package com.bradychiu.sc2ladder.model;
 
 import com.google.auto.value.AutoValue;
 import org.jetbrains.annotations.Nullable;
