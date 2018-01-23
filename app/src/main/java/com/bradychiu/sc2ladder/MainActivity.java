@@ -6,12 +6,12 @@ import android.widget.TextView;
 import com.bradychiu.sc2ladder.model.Config;
 import com.bradychiu.sc2ladder.utils.BnetApi;
 import com.bradychiu.sc2ladder.utils.ConfigService;
-import com.model.achievements.AchievementList;
-import com.model.ladder.Ladder;
-import com.model.ladders.Ladders;
-import com.model.matchHistory.MatchHistory;
-import com.model.profile.Profile;
-import com.model.rewards.Rewards;
+import com.bradychiu.sc2ladder.model.achievements.AchievementList;
+import com.bradychiu.sc2ladder.model.ladder.Ladder;
+import com.bradychiu.sc2ladder.model.ladders.Ladders;
+import com.bradychiu.sc2ladder.model.matchHistory.MatchHistory;
+import com.bradychiu.sc2ladder.model.profile.Profile;
+import com.bradychiu.sc2ladder.model.rewards.Rewards;
 public class MainActivity extends AppCompatActivity {
 
     @Override
