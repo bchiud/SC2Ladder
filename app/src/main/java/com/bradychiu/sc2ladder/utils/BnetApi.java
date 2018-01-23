@@ -110,8 +110,6 @@ public class BnetApi<T> extends AsyncTask<Void, Void, T> {
             ioe.printStackTrace();
         }
 
-        System.out.println("DIB End");
-
         return finalResult;
 
     }
