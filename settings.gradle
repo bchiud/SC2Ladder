@@ -1,1 +1,1 @@
-include ':app', ':sc2bnetmodels'
+include ':app'
