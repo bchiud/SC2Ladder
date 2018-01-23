@@ -1,6 +1,7 @@
 package com.bradychiu.sc2ladder.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import com.bradychiu.sc2ladder.model.Config;
 import java.io.IOException;
@@ -10,26 +11,17 @@ public class ConfigService {
 
     public static Config ConfigService(Context context) {
 
-        Properties prop = new Properties();
-
-        try {
-            AssetManager am = context.getAssets();
-            prop.load(am.open("config.properties"));
-        } catch(IOException ioe) {
-            ioe.printStackTrace();
-        }
-
-        System.out.println(prop.getProperty("apiKey"));
+        SharedPreferences sharedPrefs = context.getApplicationContext().getSharedPreferences("MyPref", 0);
 
         Config config = Config.builder()
-                .setApiKey(prop.getProperty("apiKey"))
-                .setGame(prop.getProperty("game"))
-                .setLadderNumber( prop.containsKey("ladderNumber") ? Integer.valueOf(prop.getProperty("ladderNumber")) : null )
-                .setLocale(prop.getProperty("locale"))
-                .setProfileNumber(Integer.valueOf(prop.getProperty("profileNumber")))
-                .setProfileName(prop.getProperty("profileName"))
-                .setRegion(prop.getProperty("region"))
-                .setRealmNumber(Integer.valueOf(prop.getProperty("realmNumber")))
+                .setApiKey(sharedPrefs.getString("apkKey", "ufpgqhpsu29c7cavcdkdajqmdv65ee23"))
+                .setGame(sharedPrefs.getString("game", "sc2"))
+                .setLadderNumber(sharedPrefs.getInt("ladderNumber", 264387))
+                .setLocale(sharedPrefs.getString("locale", "en_US"))
+                .setProfileNumber(sharedPrefs.getInt("profileNumber", 4014615))
+                .setProfileName(sharedPrefs.getString("profileName", "LieZ"))
+                .setRealmNumber(sharedPrefs.getInt("realmNumber", 1))
+                .setRegion(sharedPrefs.getString("region", "us"))
                 .build();
 
         System.out.println(config.apiKey());
