@@ -21,8 +21,6 @@ public class ConfigService {
                 .setRegion(sharedPrefs.getString("region", "us"))
                 .build();
 
-        System.out.println(config.apiKey());
-
         return config;
     }
 

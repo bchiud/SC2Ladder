@@ -42,6 +42,8 @@ public class BnetApi<T> extends AsyncTask<Void, Void, T> {
                 .host(config.region() + ".api.battle.net")
                 .addPathSegment(config.game());
 
+        // System.out.println(clazz.getName().replaceAll("^.*model\\.(\\w*\\.)?", ""));
+
         switch(clazz.getName().replaceAll("^.*model\\.(\\w*\\.)?", "")) {
             case "Profile": // https://us.api.battle.net/sc2/profile/4014615/1/LieZ/?locale=en_US&apikey=
                 urlBuilder.addPathSegment("profile")
