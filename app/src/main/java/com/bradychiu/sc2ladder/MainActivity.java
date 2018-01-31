@@ -5,16 +5,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
+import com.bradychiu.sc2ladder.api.MatchHistoryService;
+import com.bradychiu.sc2ladder.api.ProfileService;
 import com.bradychiu.sc2ladder.model.Config;
-import com.bradychiu.sc2ladder.model.drawer.DrawerItem;
-import com.bradychiu.sc2ladder.utils.BnetApi;
+import com.bradychiu.sc2ladder.model.drawer.DrawerItemModel;
+import com.bradychiu.sc2ladder.ui.NavigationDrawer;
 import com.bradychiu.sc2ladder.utils.ConfigService;
-import com.bradychiu.sc2ladder.model.achievements.AchievementList;
-import com.bradychiu.sc2ladder.model.ladder.Ladder;
-import com.bradychiu.sc2ladder.model.ladders.Ladders;
-import com.bradychiu.sc2ladder.model.matchHistory.MatchHistory;
-import com.bradychiu.sc2ladder.model.profile.Profile;
-import com.bradychiu.sc2ladder.model.rewards.Rewards;
 import com.bradychiu.sc2ladder.utils.DrawerAdapter;
 import java.util.ArrayList;
 
@@ -28,34 +24,7 @@ public class MainActivity extends AppCompatActivity {
         TextView tvMain = (TextView) findViewById(R.id.tv_main);
         tvMain.setText("");
 
-
-
-        /*
-        Navigation Drawer
-        */
-
-        ArrayList<DrawerItem>  mDrawerItemList = new ArrayList<DrawerItem>();
-        mDrawerItemList.add(DrawerItem.builder()
-                .setIcon(R.mipmap.profle)
-                .setTitle("Profile")
-                .build());
-        mDrawerItemList.add(DrawerItem.builder()
-                .setIcon(R.mipmap.ladders)
-                .setTitle("Ladders")
-                .build());
-        mDrawerItemList.add(DrawerItem.builder()
-                .setIcon(R.mipmap.match_history)
-                .setTitle("Match History")
-                .build());
-        mDrawerItemList.add(DrawerItem.builder()
-                .setIcon(R.mipmap.settings)
-                .setTitle("Settings")
-                .build());
-
-        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.rv_drawer);
-        DrawerAdapter drawerAdapter = new DrawerAdapter(mDrawerItemList);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(drawerAdapter);
+        NavigationDrawer.getNavDrawer(this);
 
 
 
@@ -65,59 +34,58 @@ public class MainActivity extends AppCompatActivity {
 
         Config config = ConfigService.ConfigService(getBaseContext());
 
-        BnetApi<Profile> profile = new BnetApi<Profile>(Profile.class, config);
-        profile.execute();
-        try {
-            tvMain.append(profile.get().toString().substring(0,50));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        tvMain.append("\n");
+        ProfileService profileService = new ProfileService(tvMain, config);
+        profileService.execute();
 
-        BnetApi<Ladders> ladders = new BnetApi<Ladders>(Ladders.class, config);
-        ladders.execute();
-        try {
-            tvMain.append(ladders.get().toString().substring(0,50));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        tvMain.append("\n");
+        MatchHistoryService matchHistoryService = new MatchHistoryService(tvMain, config);
+        matchHistoryService.execute();
 
-        BnetApi<MatchHistory> matchHistory = new BnetApi<MatchHistory>(MatchHistory.class, config);
-        matchHistory.execute();
-        try {
-            tvMain.append(matchHistory.get().toString().substring(0,50));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        tvMain.append("\n");
 
-        BnetApi<Ladder> ladder = new BnetApi<Ladder>(Ladder.class, config);
-        ladder.execute();
-        try {
-            tvMain.append(ladder.get().toString().substring(0,50));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        tvMain.append("\n");
 
-        BnetApi<AchievementList> achievements = new BnetApi<AchievementList>(AchievementList.class, config);
-        achievements.execute();
-        try {
-            tvMain.append(achievements.get().toString().substring(0,50));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        tvMain.append("\n");
-
-        BnetApi<Rewards> rewards = new BnetApi<Rewards>(Rewards.class, config);
-        rewards.execute();
-        try {
-            tvMain.append(rewards.get().toString().substring(0,50));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        tvMain.append("\n");
+        // MatchHistoryService<LaddersModel> ladders = new MatchHistoryService<LaddersModel>(LaddersModel.class, config);
+        // ladders.execute();
+        // try {
+        //     tvMain.append(ladders.get().toString().substring(0,50));
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // }
+        // tvMain.append("\n");
+        //
+        // MatchHistoryService<MatchHistoryModel> matchHistory = new MatchHistoryService<MatchHistoryModel>(MatchHistoryModel.class, config);
+        // matchHistory.execute();
+        // try {
+        //     tvMain.append(matchHistory.get().toString().substring(0,50));
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // }
+        // tvMain.append("\n");
+        //
+        // MatchHistoryService<LadderModel> ladder = new MatchHistoryService<LadderModel>(LadderModel.class, config);
+        // ladder.execute();
+        // try {
+        //     tvMain.append(ladder.get().toString().substring(0,50));
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // }
+        // tvMain.append("\n");
+        //
+        // MatchHistoryService<AchievementListModel> achievements = new MatchHistoryService<AchievementListModel>(AchievementListModel.class, config);
+        // achievements.execute();
+        // try {
+        //     tvMain.append(achievements.get().toString().substring(0,50));
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // }
+        // tvMain.append("\n");
+        //
+        // MatchHistoryService<RewardsModel> rewards = new MatchHistoryService<RewardsModel>(RewardsModel.class, config);
+        // rewards.execute();
+        // try {
+        //     tvMain.append(rewards.get().toString().substring(0,50));
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // }
+        // tvMain.append("\n");
 
     }
 }

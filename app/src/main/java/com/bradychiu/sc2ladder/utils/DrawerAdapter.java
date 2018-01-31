@@ -1,5 +1,6 @@
 package com.bradychiu.sc2ladder.utils;
 
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,21 +8,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bradychiu.sc2ladder.R;
-import com.bradychiu.sc2ladder.model.drawer.DrawerItem;
+import com.bradychiu.sc2ladder.model.drawer.DrawerItemModel;
 
 import java.util.ArrayList;
 
 public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerViewHolder> {
 
-    private ArrayList<DrawerItem> drawerMenuList;
-    public DrawerAdapter(ArrayList<DrawerItem> drawerMenuList) {
+    private ArrayList<DrawerItemModel> drawerMenuList;
+    public DrawerAdapter(ArrayList<DrawerItemModel> drawerMenuList) {
         this.drawerMenuList = drawerMenuList;
     }
 
     @Override
     public DrawerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view;
-        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.drawer_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.drawer_item, parent, false);
         return new DrawerViewHolder(view);
     }
 
@@ -43,8 +43,8 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
 
         public DrawerViewHolder(View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.title);
             icon = (ImageView) itemView.findViewById(R.id.icon);
+            title = (TextView) itemView.findViewById(R.id.title);
         }
 
     }
