@@ -1,58 +1,52 @@
 package com.bradychiu.sc2ladder.api;
 
-import com.bradychiu.sc2ladder.model.ladder.LadderModel;
-import com.bradychiu.sc2ladder.model.ladders.LaddersModel;
-import com.bradychiu.sc2ladder.model.matchHistory.MatchHistoryModel;
-import com.bradychiu.sc2ladder.model.profile.ProfileModel;
+import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.TextView;
+import com.bradychiu.sc2ladder.model.Config;
+import java.io.IOException;
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
 
-public interface SC2CommunityService {
+public class SC2CommunityService<T> extends AsyncTask<Void, Void, T> {
 
-    // https://us.api.battle.net/sc2/profile/4014615/1/LieZ/?locale=en_US&apikey=
-    @GET("/{game}/profile/{profileNumber}/{realm}/{profileName}/")
-    Call<ProfileModel> getProfile(
-            @Path("game") String game,
-            @Path("profileNumber") Integer profileNumber,
-            @Path("profileName") String profileName,
-            @Path("realm") Integer realm
-    );
+    // TODO: refactor to handle memory leaks
 
-    // https://us.api.battle.net/sc2/profile/4014615/1/LieZ/ladders?locale=en_US&apikey=
-    @GET("/{game}/profile/{realmNumber}/{profileName}/ladders")
-    Call<LaddersModel> getLadders(
-            @Path("game") String game,
-            @Path("realmNumber") Integer realmNumber,
-            @Path("profileName") String profileName
-    );
+    private TextView tv;
+    private Config config;
+    private Call<T> call;
 
-    // https://us.api.battle.net/sc2/profile/4014615/1/LieZ/matches?locale=en_US&apikey=
-    @GET("/{game}/profile/{profileNumber}/{realmNumber}/{profileName}/matches")
-    Call<MatchHistoryModel> getMatchHistory(
-            @Path("game") String game,
-            @Path("profileNumber") Integer profileNumber,
-            @Path("realmNumber") Integer realmNumber,
-            @Path("profileName") String profileName
-    );
+    // todo: refactor this to builder?
+    public SC2CommunityService(TextView tv, Config config, Call<T> call) {
+        this.tv = tv;
+        this.config = config;
+        this.call = call;
+    }
 
-    // https://us.api.battle.net/sc2/ladder/264387?locale=en_US&apikey=
-    @GET("/{game}/ladder/{ladderNumber}")
-    Call<LadderModel> getLadder(
-            @Path("game") String game,
-            @Path("ladderNumber") Integer profileNumber
-    );
+    @Override
+    public void onPreExecute() {}
 
-    // https://us.api.battle.net/sc2/data/achievements?locale=en_US&apikey=
-    @GET("/{game}/data/achievements")
-    Call<LadderModel> getAchievementList(
-            @Path("game") String game
-    );
+    @Override
+    public T doInBackground(Void... params) {
 
-    // https://us.api.battle.net/sc2/data/rewards?locale=en_US&apikey=
-    @GET("/{game}/data/rewards")
-    Call<LadderModel> getRewards(
-            @Path("game") String game
-    );
+        T profile = null;
+
+        try {
+            profile = call.execute().body();
+        } catch (IOException e) {
+            // TODO: toast for user, and log.d for dev, do not stack trace in prod
+            Log.d("", "API call failed");
+            e.printStackTrace();
+        } finally {
+            // TODO: make - profile is already null?
+        }
+
+        return profile;
+
+    }
+
+    @Override
+    public void onPostExecute(T t) {
+        tv.append(t.toString().substring(0,50) + "\n");
+    }
 
 }

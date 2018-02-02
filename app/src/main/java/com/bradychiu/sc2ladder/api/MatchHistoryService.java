@@ -30,9 +30,9 @@ public class MatchHistoryService extends AsyncTask<Void, Void, MatchHistoryModel
 
         Retrofit retrofit = RetrofitUtils.getRetrofit(config);
 
-        SC2CommunityService SC2CommunityService = retrofit.create(SC2CommunityService.class);
+        SC2CommunityApi SC2CommunityApi = retrofit.create(SC2CommunityApi.class);
 
-        Call<MatchHistoryModel> call = SC2CommunityService.getMatchHistory(
+        Call<MatchHistoryModel> call = SC2CommunityApi.getMatchHistory(
                 config.game(),
                 config.profileNumber(),
                 config.realmNumber(),
