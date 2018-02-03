@@ -1,5 +1,6 @@
 package com.bradychiu.sc2ladder.model.matchHistory;
 
+import android.os.Parcelable;
 import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
@@ -9,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 @AutoValue
-public abstract class MatchHistoryModel {
+public abstract class MatchHistoryModel implements Parcelable {
 
     // TODO: is nullable the right way to treat non existing values? tried "optional" from auto value but moshi no like
     @Json(name = "matches") @Nullable public abstract List<MatchModel> getMatches();

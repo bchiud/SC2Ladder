@@ -1,12 +1,13 @@
 package com.bradychiu.sc2ladder.model.profile;
 
+import android.os.Parcelable;
 import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 
 @AutoValue
-public abstract class ProfilePointsModel {
+public abstract class ProfilePointsModel implements Parcelable {
 
     @Json(name = "totalPoints") public abstract int totalPoints();
     @Json(name = "categoryPoints") public abstract CategoryPointsModel categoryPoints();

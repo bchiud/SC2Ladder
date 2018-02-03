@@ -1,12 +1,13 @@
 package com.bradychiu.sc2ladder.model.achievements;
 
+import android.os.Parcelable;
 import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 
 @AutoValue
-public abstract class AchievementCategoryChildrenModel {
+public abstract class AchievementCategoryChildrenModel implements Parcelable{
 
     @Json(name = "title") public abstract String title();
     @Json(name = "categoryId") public abstract Long categoryId();

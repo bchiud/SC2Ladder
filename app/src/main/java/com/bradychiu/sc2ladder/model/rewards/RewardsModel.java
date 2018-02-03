@@ -1,5 +1,6 @@
 package com.bradychiu.sc2ladder.model.rewards;
 
+import android.os.Parcelable;
 import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
@@ -8,7 +9,7 @@ import com.squareup.moshi.Moshi;
 import java.util.List;
 
 @AutoValue
-public abstract class RewardsModel {
+public abstract class RewardsModel implements Parcelable {
 
     @Json(name = "portraits") public abstract List<PortraitModel> portraits();
     @Json(name = "terranDecals") public abstract List<PortraitModel> terranDecals();

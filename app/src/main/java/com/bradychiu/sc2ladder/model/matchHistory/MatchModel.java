@@ -1,12 +1,13 @@
 package com.bradychiu.sc2ladder.model.matchHistory;
 
+import android.os.Parcelable;
 import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 
 @AutoValue
-public abstract class MatchModel {
+public abstract class MatchModel implements Parcelable {
 
     @Json(name = "map") public abstract String map();
     @Json(name = "type") abstract String type();

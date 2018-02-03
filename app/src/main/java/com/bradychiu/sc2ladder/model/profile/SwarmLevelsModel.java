@@ -1,12 +1,13 @@
 package com.bradychiu.sc2ladder.model.profile;
 
+import android.os.Parcelable;
 import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 
 @AutoValue
-public abstract class SwarmLevelsModel {
+public abstract class SwarmLevelsModel implements Parcelable {
 
     @Json(name = "level") public abstract int level();
     @Json(name = "terran") public abstract SwarmLevelsRaceModel terran();

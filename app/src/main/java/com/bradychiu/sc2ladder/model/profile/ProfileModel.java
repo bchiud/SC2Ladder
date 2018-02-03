@@ -1,5 +1,6 @@
 package com.bradychiu.sc2ladder.model.profile;
 
+import android.os.Parcelable;
 import com.bradychiu.sc2ladder.model.common.IconModel;
 import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
@@ -8,7 +9,7 @@ import com.squareup.moshi.Moshi;
 import org.jetbrains.annotations.Nullable;
 
 @AutoValue
-public abstract class ProfileModel {
+public abstract class ProfileModel implements Parcelable {
 
     @Json(name = "id") public abstract int id();
     @Json(name = "realm") public abstract int realm();

@@ -1,5 +1,6 @@
 package com.bradychiu.sc2ladder.model.profile;
 
+import android.os.Parcelable;
 import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
@@ -9,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 @AutoValue
-public abstract class SeasonModel {
+public abstract class SeasonModel implements Parcelable {
 
     @Json(name = "seasonID") public abstract int seasonId();
     @Json(name = "seasonYear") public abstract int seasonYear();

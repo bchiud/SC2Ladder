@@ -1,5 +1,6 @@
 package com.bradychiu.sc2ladder.model.common;
 
+import android.os.Parcelable;
 import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
@@ -7,7 +8,7 @@ import com.squareup.moshi.Moshi;
 import org.jetbrains.annotations.Nullable;
 
 @AutoValue
-public abstract class LadderCharacterModel {
+public abstract class LadderCharacterModel implements Parcelable {
 
     @Json(name = "id") public abstract int id();
     @Json(name = "realm") public abstract int realm();

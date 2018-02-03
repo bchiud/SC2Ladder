@@ -1,7 +1,7 @@
 package com.bradychiu.sc2ladder.utils;
 
+import android.content.Context;
 import com.bradychiu.sc2ladder.api.AdapterFactory;
-import com.bradychiu.sc2ladder.model.Config;
 import com.squareup.moshi.Moshi;
 import okhttp3.*;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -13,7 +13,9 @@ import java.net.URL;
 
 public class RetrofitUtils {
 
-    public static Retrofit getRetrofit(final Config config) {
+    public static Retrofit getRetrofit(Context appContext) {
+
+        final SharedPrefsService sharedPrefsService = SharedPrefsService.getInstance(appContext);
 
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .addInterceptor(new Interceptor() {
@@ -23,8 +25,8 @@ public class RetrofitUtils {
                         HttpUrl originalHttpUrl = original.url();
 
                         HttpUrl url = originalHttpUrl.newBuilder()
-                                .addQueryParameter("locale", config.locale())
-                                .addQueryParameter("apikey", config.apiKey())
+                                .addQueryParameter("locale", sharedPrefsService.getLocale())
+                                .addQueryParameter("apikey", sharedPrefsService.getApiKey())
                                 .build();
 
                         Request.Builder requestBuilder = original.newBuilder()
@@ -40,7 +42,7 @@ public class RetrofitUtils {
 
         URL bnetUrl = new HttpUrl.Builder()
                 .scheme("https")
-                .host(config.region() + ".api.battle.net")
+                .host(sharedPrefsService.getRegion() + ".api.battle.net")
                 .build()
                 .url();
 

@@ -35,6 +35,11 @@ dependencies {
     provided "com.google.auto.value:auto-value:1.5"
     annotationProcessor "com.google.auto.value:auto-value:1.5"
 
+    // autoValueParcelable
+    annotationProcessor 'com.ryanharter.auto.value:auto-value-parcel:0.2.6'
+    // Optionally for TypeAdapter support
+    //compile 'com.ryanharter.auto.value:auto-value-parcel-adapter:0.2.6'
+
     // moshi
     compile 'com.squareup.moshi:moshi:1.5.0'
     compile 'com.squareup.moshi:moshi-kotlin:1.5.0'

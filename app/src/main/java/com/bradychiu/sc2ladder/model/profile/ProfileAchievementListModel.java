@@ -1,5 +1,6 @@
 package com.bradychiu.sc2ladder.model.profile;
 
+import android.os.Parcelable;
 import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
@@ -7,7 +8,7 @@ import com.squareup.moshi.Moshi;
 import java.util.List;
 
 @AutoValue
-public abstract class ProfileAchievementListModel {
+public abstract class ProfileAchievementListModel implements Parcelable {
 
     @Json(name = "points") public abstract ProfilePointsModel points();
     @Json(name = "achievements") public abstract List<ProfileAchievementModel> achievements();

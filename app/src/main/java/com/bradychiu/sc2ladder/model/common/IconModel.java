@@ -1,12 +1,13 @@
 package com.bradychiu.sc2ladder.model.common;
 
+import android.os.Parcelable;
 import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 
 @AutoValue
-public abstract class IconModel {
+public abstract class IconModel implements Parcelable{
 
     @Json(name = "x") public abstract Integer x();
     @Json(name = "y") public abstract Integer y();

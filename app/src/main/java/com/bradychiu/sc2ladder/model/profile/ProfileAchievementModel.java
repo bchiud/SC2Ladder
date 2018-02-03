@@ -1,12 +1,13 @@
 package com.bradychiu.sc2ladder.model.profile;
 
+import android.os.Parcelable;
 import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 
 @AutoValue
-public abstract class ProfileAchievementModel {
+public abstract class ProfileAchievementModel implements Parcelable {
 
     @Json(name = "achievementId") public abstract long achievementId();
     @Json(name = "completionDate") public abstract long completionDate();

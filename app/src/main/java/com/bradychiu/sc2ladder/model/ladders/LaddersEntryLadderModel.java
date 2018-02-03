@@ -1,12 +1,13 @@
 package com.bradychiu.sc2ladder.model.ladders;
 
+import android.os.Parcelable;
 import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 
 @AutoValue
-public abstract class LaddersEntryLadderModel {
+public abstract class LaddersEntryLadderModel implements Parcelable {
 
     @Json(name = "ladderName") public abstract String ladderName();
     @Json(name = "ladderId") public abstract Integer ladderId();

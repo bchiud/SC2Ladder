@@ -1,12 +1,13 @@
 package com.bradychiu.sc2ladder.model.profile;
 
+import android.os.Parcelable;
 import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 
 @AutoValue
-public abstract class SeasonStatsModel {
+public abstract class SeasonStatsModel implements Parcelable {
 
     @Json(name = "type") public abstract String type();
     @Json(name = "wins") public abstract int wins();

@@ -1,5 +1,6 @@
 package com.bradychiu.sc2ladder.model.profile;
 
+import android.os.Parcelable;
 import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
@@ -7,7 +8,7 @@ import com.squareup.moshi.Moshi;
 import org.jetbrains.annotations.Nullable;
 
 @AutoValue
-public abstract class CareerModel {
+public abstract class CareerModel implements Parcelable {
     @Json(name = "primaryRace") public abstract String primaryRace();
     @Json(name = "terranWins") public abstract int terranWins();
     @Json(name = "protossWins") public abstract int protossWins();
