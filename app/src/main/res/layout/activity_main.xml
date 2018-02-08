@@ -8,11 +8,33 @@
         android:layout_height="match_parent"
         tools:context="com.bradychiu.sc2ladder.MainActivity" >
 
-    <!--main content-->
-    <TextView
-            android:id="@+id/tv_main"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <!--main content-->
+        <TextView
+                android:id="@+id/tv_main"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+        <FrameLayout
+                android:id="@+id/fl_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+        <!--match history-->
+        <fragment
+                android:name="com.bradychiu.sc2ladder.ui.MatchHistoryFragment"
+                android:id="@+id/fragment_match_history"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+    </LinearLayout>
 
     <!--navigation drawer-->
     <android.support.v7.widget.RecyclerView
@@ -22,4 +44,4 @@
             android:layout_gravity="left"
             android:background="#FFFFFF"/>
 
-</android.support.v4.widget.DrawerLayout>
+</android.support.v4.widget.DrawerLayout  >

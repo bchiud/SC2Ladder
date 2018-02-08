@@ -36,7 +36,7 @@ public class NavigationDrawer {
                 .build());
 
         RecyclerView mRecyclerView = (RecyclerView) activity.findViewById(R.id.rv_drawer);
-        DrawerAdapter drawerAdapter = new DrawerAdapter(mDrawerItemList);
+        DrawerAdapter drawerAdapter = new DrawerAdapter(mDrawerItemList, activity);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(activity));
         mRecyclerView.setAdapter(drawerAdapter);
 

@@ -61,4 +61,7 @@ dependencies {
     // recyclerview
     compile 'com.android.support:recyclerview-v7:27.0.2'
 
+    // design support
+    compile 'com.android.support:design:27.0.2'
+
 }

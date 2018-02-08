@@ -1,5 +1,8 @@
 package com.bradychiu.sc2ladder;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -7,10 +10,12 @@ import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.TextView;
 import com.bradychiu.sc2ladder.api.SC2CommunityService;
 import com.bradychiu.sc2ladder.api.SC2CommunityApi;
 import com.bradychiu.sc2ladder.model.profile.ProfileModel;
+import com.bradychiu.sc2ladder.ui.MatchHistoryFragment;
 import com.bradychiu.sc2ladder.ui.NavigationDrawer;
 import com.bradychiu.sc2ladder.utils.RetrofitUtils;
 import com.bradychiu.sc2ladder.utils.SharedPrefsService;
@@ -21,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     LocalBroadcastManager mLocalBroadcastManager;
     TextView mMainTextView;
+    ProfileModel profile;
     final String PROFILE_INTENT_KEY = "profile";
 
     @Override
@@ -50,6 +56,24 @@ public class MainActivity extends AppCompatActivity {
         SC2CommunityService<ProfileModel> profileService = new SC2CommunityService(getApplicationContext(),PROFILE_INTENT_KEY, profileCall);
         profileService.execute();
         mLocalBroadcastManager.registerReceiver(mProfileBroadcastReceiver, new IntentFilter(PROFILE_INTENT_KEY));
+
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Fragment fragment = null;
+        try {
+            fragment = MatchHistoryFragment.class.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        fragmentTransaction.replace(R.id.fl_content, fragment);
+        fragmentTransaction.commit();
+
+        TextView tv = (TextView) findViewById(R.id.tv_match_history);
+        tv.setText("qwer");
+
+
+
 
         // SC2CommunityService<LaddersModel> laddersService = new SC2CommunityService<>(tvMain, config,
         //         sc2CommunityApi.getLadders(config.game(),
@@ -89,8 +113,21 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            ProfileModel profile = intent.getParcelableExtra(PROFILE_INTENT_KEY);
-            mMainTextView.append(profile.toString().substring(0,50) + "\n");
+            profile = intent.getParcelableExtra(PROFILE_INTENT_KEY);
+            mMainTextView.setText("");
+
+            StringBuilder sbPlayerName = new StringBuilder();
+            if(!TextUtils.isEmpty(profile.clanTag())) sbPlayerName.append("[" + profile.clanTag() + "]");
+            sbPlayerName.append(profile.displayName());
+            mMainTextView.append("Player: " + sbPlayerName.toString() + "\n");
+
+            mMainTextView.append("Highest 1v1 Rank: " + profile.career().highest1v1Rank() + "\n");
+
+            mMainTextView.append("Highest Team Rank: " + profile.career().highestTeamRank() + "\n");
+
+            mMainTextView.append("Season Games: " + profile.career().seasonTotalGames() + "\n");
+
+            mMainTextView.append("Career Games: " + profile.career().careerTotalGames() + "\n");
         }
     };
 }
