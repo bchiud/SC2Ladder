@@ -4,9 +4,9 @@
               android:layout_height="match_parent">
 
     <TextView
-            android:id="@+id/tv_match_history"
+            android:id="@+id/tv_settings"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Match History"/>
+            android:text="Settings"/>
 
 </LinearLayout>

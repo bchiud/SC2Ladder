@@ -10,16 +10,25 @@ import com.bradychiu.sc2ladder.R;
 
 public class MatchHistoryFragment extends Fragment {
 
+    private TextView mTextView;
+
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_match_history, container, false);
+        View view = inflater.inflate(R.layout.fragment_match_history, container, false);
+        System.out.println(R.id.tv_match_history);
+        mTextView = (TextView) view.findViewById(R.id.tv_match_history);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        mTextView.setText("Match History Frag Started");
     }
 
     public void setText(String text) {
-        TextView view = (TextView) getView().findViewById(R.id.tv_match_history);
-        view.setText(text);
+        mTextView.setText(text);
     }
 
 }

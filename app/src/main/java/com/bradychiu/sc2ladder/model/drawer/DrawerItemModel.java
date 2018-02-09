@@ -5,8 +5,9 @@ import com.google.auto.value.AutoValue;
 @AutoValue
 public abstract class DrawerItemModel {
 
-    public abstract int getIcon();
+    public abstract Integer getIcon();
     public abstract String getTitle();
+    public abstract Integer getFragmentId();
 
     public static Builder builder() {
         return new AutoValue_DrawerItemModel.Builder();
@@ -14,8 +15,9 @@ public abstract class DrawerItemModel {
 
     @AutoValue.Builder
     public abstract static class Builder {
-        public abstract Builder setIcon(int value);
+        public abstract Builder setIcon(Integer value);
         public abstract Builder setTitle(String title);
+        public abstract Builder setFragmentId(Integer value);
         public abstract DrawerItemModel build();
     }
 

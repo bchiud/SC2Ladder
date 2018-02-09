@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.bradychiu.sc2ladder.api.SC2CommunityService;
 import com.bradychiu.sc2ladder.api.SC2CommunityApi;
 import com.bradychiu.sc2ladder.model.profile.ProfileModel;
@@ -37,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         mMainTextView = (TextView) findViewById(R.id.tv_main);
 
-        NavigationDrawer.getNavDrawer(this);
+        NavigationDrawer navigationDrawer = new NavigationDrawer(this, this);
+        navigationDrawer.getNavDrawer();
 
         mLocalBroadcastManager = LocalBroadcastManager.getInstance(this);
 
@@ -68,11 +70,6 @@ public class MainActivity extends AppCompatActivity {
         }
         fragmentTransaction.replace(R.id.fl_content, fragment);
         fragmentTransaction.commit();
-
-        TextView tv = (TextView) findViewById(R.id.tv_match_history);
-        tv.setText("qwer");
-
-
 
 
         // SC2CommunityService<LaddersModel> laddersService = new SC2CommunityService<>(tvMain, config,
