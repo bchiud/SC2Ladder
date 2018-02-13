@@ -19,9 +19,9 @@ public class RetrofitUtil {
     private static RetrofitUtil singletonRetrofitUtilInstance;
     private static Retrofit singletonRetrofitInstance;
 
-    private RetrofitUtil(Context appContext) {
+    private RetrofitUtil(Context context) {
 
-        final SharedPrefsService sharedPrefsService = SharedPrefsService.getInstance(appContext);
+        final SharedPrefsService sharedPrefsService = SharedPrefsService.getInstance(context);
 
         final OkHttpClient httpClient = new OkHttpClient.Builder()
                 .addInterceptor(new Interceptor() {

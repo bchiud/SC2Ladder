@@ -29,7 +29,8 @@ public class SharedPrefsService {
 
     private SharedPrefsService(Context context) {
 
-        sharedPrefs = context.getApplicationContext().getSharedPreferences("MyPref", 0);
+        Context nContext = context.getApplicationContext();
+        sharedPrefs = nContext.getSharedPreferences("MyPref", 0);
         sharedPrefsEditor = sharedPrefs.edit();
 
         apiKey = sharedPrefs.getString(K_API_KEY, "ufpgqhpsu29c7cavcdkdajqmdv65ee23");

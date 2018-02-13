@@ -1,15 +1,27 @@
 package com.bradychiu.sc2ladder.ui;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.bradychiu.sc2ladder.R;
+import com.bradychiu.sc2ladder.api.SC2CommunityApi;
+import com.bradychiu.sc2ladder.model.matchHistory.MatchHistoryModel;
+import com.bradychiu.sc2ladder.utils.RetrofitUtil;
+import com.bradychiu.sc2ladder.utils.SharedPrefsService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class MatchHistoryFragment extends Fragment {
 
+    private Context mContext;
+    private MatchHistoryModel mMatchHistory;
     private TextView mTextView;
 
     @Override
@@ -17,17 +29,41 @@ public class MatchHistoryFragment extends Fragment {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_match_history, container, false);
+        mContext = getActivity();
         mTextView = (TextView) view.findViewById(R.id.tv_match_history);
         return view;
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        mTextView.setText("Match History Frag Started");
-    }
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        SharedPrefsService sharedPrefsService = SharedPrefsService.getInstance(mContext);
+        Retrofit retrofit = RetrofitUtil.getRetrofit(mContext);
+        SC2CommunityApi sc2CommunityApi = retrofit.create(SC2CommunityApi.class);
 
-    public void setText(String text) {
-        mTextView.setText(text);
+        Call<MatchHistoryModel> matchHistoryCall = sc2CommunityApi.getMatchHistory(sharedPrefsService.getGame(),
+                sharedPrefsService.getProfileNumber(),
+                sharedPrefsService.getRealmNumber(),
+                sharedPrefsService.getProfileName());
+
+        matchHistoryCall.enqueue(new Callback<MatchHistoryModel>() {
+
+            @Override
+            public void onResponse(Call<MatchHistoryModel> call, Response<MatchHistoryModel> response) {
+                if(response.isSuccessful()) {
+                    mMatchHistory = response.body();
+                    mTextView.setText(mMatchHistory.toString());
+                } else {
+                    //TODO: error response, no access to resource?
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MatchHistoryModel> call, Throwable t) {
+                //TODO: something went completely south (like no internet connection)
+                Log.d("Error", t.getMessage());
+            }
+        });
     }
 
 }
