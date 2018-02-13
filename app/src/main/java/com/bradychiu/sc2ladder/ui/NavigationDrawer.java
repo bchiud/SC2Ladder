@@ -47,9 +47,8 @@ public class NavigationDrawer implements DrawerAdapter.DrawerItemClickListener {
                 .build());
 
         RecyclerView mRecyclerView = (RecyclerView) mActivity.findViewById(R.id.rv_drawer);
-        DrawerAdapter drawerAdapter = new DrawerAdapter(mDrawerItemList, this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        mRecyclerView.setAdapter(drawerAdapter);
+        mRecyclerView.setAdapter(new DrawerAdapter(mDrawerItemList, this));
     }
 
     @Override

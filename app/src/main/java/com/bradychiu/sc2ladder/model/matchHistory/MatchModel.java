@@ -10,7 +10,7 @@ import com.squareup.moshi.Moshi;
 public abstract class MatchModel implements Parcelable {
 
     @Json(name = "map") public abstract String map();
-    @Json(name = "type") abstract String type();
+    @Json(name = "type") public abstract String type();
     @Json(name = "decision") public abstract String decision();
     @Json(name = "speed") public abstract String speed();
     @Json(name = "date") public abstract Long date();
