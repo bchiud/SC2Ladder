@@ -1,6 +1,9 @@
 package com.bradychiu.sc2ladder.utils;
 
+import android.app.Service;
 import android.content.Context;
+import android.content.Intent;
+import android.os.IBinder;
 import com.bradychiu.sc2ladder.api.AdapterFactory;
 import com.squareup.moshi.Moshi;
 import okhttp3.*;
@@ -11,13 +14,16 @@ import retrofit2.converter.moshi.MoshiConverterFactory;
 import java.io.IOException;
 import java.net.URL;
 
-public class RetrofitUtils {
+public class RetrofitUtil {
 
-    public static Retrofit getRetrofit(Context appContext) {
+    private static RetrofitUtil singletonRetrofitUtilInstance;
+    private static Retrofit singletonRetrofitInstance;
+
+    private RetrofitUtil(Context appContext) {
 
         final SharedPrefsService sharedPrefsService = SharedPrefsService.getInstance(appContext);
 
-        OkHttpClient httpClient = new OkHttpClient.Builder()
+        final OkHttpClient httpClient = new OkHttpClient.Builder()
                 .addInterceptor(new Interceptor() {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
@@ -40,22 +46,25 @@ public class RetrofitUtils {
                         .setLevel(HttpLoggingInterceptor.Level.BASIC))
                 .build();
 
-        URL bnetUrl = new HttpUrl.Builder()
+        final URL bnetUrl = new HttpUrl.Builder()
                 .scheme("https")
                 .host(sharedPrefsService.getRegion() + ".api.battle.net")
                 .build()
                 .url();
 
-        Moshi moshi = new Moshi.Builder()
+        final Moshi moshi = new Moshi.Builder()
                 .add(AdapterFactory.create())
                 .build();
 
-        Retrofit retrofit = new Retrofit.Builder()
+        singletonRetrofitInstance = new Retrofit.Builder()
                 .baseUrl(bnetUrl.toString())
                 .client(httpClient)
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .build();
+    }
 
-        return retrofit;
+    public static Retrofit getRetrofit(Context context) {
+        if(singletonRetrofitUtilInstance == null) singletonRetrofitUtilInstance = new RetrofitUtil(context);
+        return singletonRetrofitInstance;
     }
 }

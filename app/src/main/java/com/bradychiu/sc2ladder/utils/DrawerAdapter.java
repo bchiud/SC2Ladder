@@ -60,12 +60,12 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
         @Override
         public void onClick(View view) {
             int clickedPosition = getAdapterPosition();
-            mListener.onDrawerItemClick(clickedPosition);
+            mListener.onDrawerItemClick(mDrawerMenuList.get(clickedPosition).getTitle());
         }
     }
 
     public interface DrawerItemClickListener {
-        void onDrawerItemClick(int clickedPosition);
+        void onDrawerItemClick(String buttonTitle);
     }
 
 }

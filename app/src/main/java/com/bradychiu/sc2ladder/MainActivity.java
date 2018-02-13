@@ -12,13 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.bradychiu.sc2ladder.api.SC2CommunityService;
 import com.bradychiu.sc2ladder.api.SC2CommunityApi;
 import com.bradychiu.sc2ladder.model.profile.ProfileModel;
-import com.bradychiu.sc2ladder.ui.MatchHistoryFragment;
-import com.bradychiu.sc2ladder.ui.NavigationDrawer;
-import com.bradychiu.sc2ladder.utils.RetrofitUtils;
+import com.bradychiu.sc2ladder.ui.*;
+import com.bradychiu.sc2ladder.utils.RetrofitUtil;
 import com.bradychiu.sc2ladder.utils.SharedPrefsService;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -29,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     TextView mMainTextView;
     ProfileModel profile;
     final String PROFILE_INTENT_KEY = "profile";
+    Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,16 +37,16 @@ public class MainActivity extends AppCompatActivity {
 
         mMainTextView = (TextView) findViewById(R.id.tv_main);
 
-        NavigationDrawer navigationDrawer = new NavigationDrawer(this, this);
-        navigationDrawer.getNavDrawer();
+        new NavigationDrawer(this);
 
         mLocalBroadcastManager = LocalBroadcastManager.getInstance(this);
+        mContext = getApplicationContext();
 
         /*
         Populate MainActivity
         */
 
-        Retrofit retrofit = RetrofitUtils.getRetrofit(this);
+        Retrofit retrofit = RetrofitUtil.getRetrofit(this);
         SC2CommunityApi sc2CommunityApi = retrofit.create(SC2CommunityApi.class);
 
         Call<ProfileModel> profileCall = sc2CommunityApi.getProfile(sharedPrefsService.getGame(),
@@ -59,12 +58,11 @@ public class MainActivity extends AppCompatActivity {
         profileService.execute();
         mLocalBroadcastManager.registerReceiver(mProfileBroadcastReceiver, new IntentFilter(PROFILE_INTENT_KEY));
 
-
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         Fragment fragment = null;
         try {
-            fragment = MatchHistoryFragment.class.newInstance();
+            fragment = ProfileFragment.class.newInstance();
         } catch (Exception e) {
             e.printStackTrace();
         }

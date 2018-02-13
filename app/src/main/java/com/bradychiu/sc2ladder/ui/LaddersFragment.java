@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.bradychiu.sc2ladder.R;
 
-public class MatchHistoryFragment extends Fragment {
+public class LaddersFragment extends Fragment {
 
     private TextView mTextView;
 
@@ -16,14 +16,14 @@ public class MatchHistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_match_history, container, false);
-        mTextView = (TextView) view.findViewById(R.id.tv_match_history);
+        View view = inflater.inflate(R.layout.fragment_ladders, container, false);
+        mTextView = (TextView) view.findViewById(R.id.tv_ladders);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        mTextView.setText("Match History Frag Started");
+        mTextView.setText("Ladders Frag Started");
     }
 
     public void setText(String text) {

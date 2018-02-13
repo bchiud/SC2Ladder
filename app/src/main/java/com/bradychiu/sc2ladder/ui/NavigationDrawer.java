@@ -1,6 +1,9 @@
 package com.bradychiu.sc2ladder.ui;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,60 +17,65 @@ import java.util.ArrayList;
 
 public class NavigationDrawer implements DrawerAdapter.DrawerItemClickListener {
 
-    private Toast mToast;
-    private Context mContext;
     private Activity mActivity;
+    private ArrayList<DrawerItemModel> mDrawerItemList;
 
-    public NavigationDrawer(Context context, Activity activity) {
-        mContext = context;
+    public NavigationDrawer(Activity activity) {
         mActivity = activity;
-    }
-
-    public void getNavDrawer() {
 
         /*
         Navigation Drawer
         http://blog.technoguff.com/2015/07/navigation-drawer-using-recyclerview.html
         */
 
-        ArrayList<DrawerItemModel> mDrawerItemList = new ArrayList<>();
+        mDrawerItemList = new ArrayList<>();
         mDrawerItemList.add(DrawerItemModel.builder()
                 .setIcon(R.mipmap.profle)
                 .setTitle("Profile")
-                .setFragmentId(R.layout.fragment_profile)
                 .build());
         mDrawerItemList.add(DrawerItemModel.builder()
                 .setIcon(R.mipmap.ladders)
                 .setTitle("Ladders")
-                .setFragmentId(R.layout.fragment_ladders)
                 .build());
         mDrawerItemList.add(DrawerItemModel.builder()
                 .setIcon(R.mipmap.match_history)
                 .setTitle("Match History")
-                .setFragmentId(R.layout.fragment_match_history)
                 .build());
         mDrawerItemList.add(DrawerItemModel.builder()
                 .setIcon(R.mipmap.settings)
                 .setTitle("Settings")
-                .setFragmentId(R.layout.fragment_settings)
                 .build());
 
         RecyclerView mRecyclerView = (RecyclerView) mActivity.findViewById(R.id.rv_drawer);
         DrawerAdapter drawerAdapter = new DrawerAdapter(mDrawerItemList, this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mRecyclerView.setAdapter(drawerAdapter);
-
     }
 
     @Override
-    public void onDrawerItemClick(int clickedPosition) {
-        if (mToast != null) {
-            mToast.cancel();
+    public void onDrawerItemClick(String buttonTitle) {
+        FragmentManager fragmentManager = mActivity.getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Fragment fragment = null;
+        try {
+            switch(buttonTitle) {
+                case "Profile":
+                    fragment = ProfileFragment.class.newInstance();
+                    break;
+                case "Ladders":
+                    fragment = LaddersFragment.class.newInstance();
+                    break;
+                case "Match History":
+                    fragment = MatchHistoryFragment.class.newInstance();
+                    break;
+                case "Settings":
+                    fragment = SettingsFragment.class.newInstance();
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        String toastMessage = "Item #" + clickedPosition + " clicked.";
-        mToast = Toast.makeText(mContext, toastMessage, Toast.LENGTH_LONG);
-
-        mToast.show();
+        fragmentTransaction.replace(R.id.fl_content, fragment);
+        fragmentTransaction.commit();
     }
 }
