@@ -1,12 +1,17 @@
 package com.bradychiu.sc2ladder.utils;
 
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import com.bradychiu.sc2ladder.R;
 import com.bradychiu.sc2ladder.api.CommunityOAuthProfileApi;
 import com.bradychiu.sc2ladder.model.oauth.SC2OAuthProfileCharacterModel;
 import com.bradychiu.sc2ladder.model.oauth.SC2OAuthProfileModel;
-import com.bradychiu.sc2ladder.ui.AccountFragment;
+import com.bradychiu.sc2ladder.ui.ProfileFragment;
 import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
 import com.google.api.client.auth.oauth2.BearerToken;
 import com.google.api.client.auth.oauth2.ClientParametersAuthentication;
@@ -24,6 +29,8 @@ import java.net.URL;
 import java.util.Arrays;
 
 public class OAuthHelper {
+
+    // TODO: merge profile calls from oauth + profile fragment so there is only 1 call instead of 2
 
     private AuthorizationCodeFlow mAuthorizationCodeFlow;
     private Context mContext;
@@ -89,13 +96,11 @@ public class OAuthHelper {
 
         @Override
         protected void onPostExecute(TokenResponse tokenResponse) {
-            updateAccessToken(tokenResponse.getAccessToken());
-            updateSharedPrefs();
+            updateToken(tokenResponse);
+            updateProfileSharedPrefs();
         }
 
     }
-
-
 
     private URL getAuthUrl() {
         return new HttpUrl.Builder()
@@ -113,11 +118,12 @@ public class OAuthHelper {
                 .build().url();
     }
 
-    public void updateAccessToken(String accessToken) {
-        mSharedPrefsService.setAccessToken(accessToken);
+    public void updateToken(TokenResponse tokenResponse) {
+        mSharedPrefsService.setAccessToken(tokenResponse.getAccessToken());
+        mSharedPrefsService.setAccessTokenExpires((System.currentTimeMillis() / 1000) + tokenResponse.getExpiresInSeconds());
     }
 
-    public void updateSharedPrefs () {
+    public void updateProfileSharedPrefs () {
         Retrofit retrofit = RetrofitUtil.getRetrofit(mContext);
         CommunityOAuthProfileApi communityOAuthProfileApi = retrofit.create(CommunityOAuthProfileApi.class);
         Call<SC2OAuthProfileModel> sc2OAuthProfileModelCall = communityOAuthProfileApi.getSC2OAuthProfile(mSharedPrefsService.getAccessToken());
@@ -132,6 +138,8 @@ public class OAuthHelper {
                     mSharedPrefsService.setProfileName(firstCharacter.displayName());
                     mSharedPrefsService.setRealmNumber(firstCharacter.realm());
 
+                    getProfileFragment();
+
                 } else {
                     // TODO: error response, no access to resource?
                 }
@@ -143,6 +151,19 @@ public class OAuthHelper {
                 Log.d("Error", throwable.getMessage());
             }
         });
+    }
+
+    public void getProfileFragment() {
+        FragmentManager fragmentManager = ((Activity) mContext).getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Fragment fragment = null;
+        try {
+            fragment = ProfileFragment.class.newInstance();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        fragmentTransaction.replace(R.id.fl_content, fragment);
+        fragmentTransaction.commit();
     }
 
 }

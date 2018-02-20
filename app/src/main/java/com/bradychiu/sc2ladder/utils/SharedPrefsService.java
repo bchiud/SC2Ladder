@@ -14,6 +14,7 @@ public class SharedPrefsService {
     private static SharedPrefsService singleton_instance = null;
 
     private static final String K_ACCESS_TOKEN = "accessToken";
+    private static final String K_ACCESS_TOKEN_EXPIRES = "accessTokenExpires";
     private static final String K_API_KEY = "apiKey";
     private static final String K_API_SECRET_KEY = "apiSecretKey";
     private static final String K_GAME = "game";
@@ -46,6 +47,14 @@ public class SharedPrefsService {
 
     public void setAccessToken(String accessToken) {
         sharedPrefsEditor.putString(K_ACCESS_TOKEN, accessToken).apply();
+    }
+
+    public Long getAccessTokenExpires() {
+        return sharedPrefs.getLong(K_ACCESS_TOKEN_EXPIRES, 0);
+    }
+
+    public void setAccessTokenExpires(Long accessTokenExpires) {
+        sharedPrefsEditor.putLong(K_ACCESS_TOKEN_EXPIRES, accessTokenExpires).apply();
     }
 
     public String getApiKey() {

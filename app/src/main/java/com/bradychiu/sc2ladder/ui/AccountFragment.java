@@ -1,11 +1,8 @@
 package com.bradychiu.sc2ladder.ui;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +13,6 @@ import android.webkit.WebViewClient;
 import com.bradychiu.sc2ladder.R;
 import com.bradychiu.sc2ladder.utils.OAuthHelper;
 import com.bradychiu.sc2ladder.utils.SharedPrefsService;
-import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
-import com.google.api.client.auth.oauth2.TokenResponse;
 
 public class AccountFragment extends Fragment {
 
@@ -42,6 +37,16 @@ public class AccountFragment extends Fragment {
         mSharedPrefsService = SharedPrefsService.getInstance(mContext);
         mWebView = view.findViewById(R.id.wv_account_login);
 
+        if(mSharedPrefsService.getAccessTokenExpires() > System.currentTimeMillis() / 1000) {
+            mOAuthHelper.getProfileFragment();
+        } else {
+            setupWebView();
+        }
+
+        return view;
+    }
+
+    public void setupWebView() {
         // Enable Javascript
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -58,29 +63,12 @@ public class AccountFragment extends Fragment {
                     String authCode= uri.getQueryParameter("code");
 
                     mOAuthHelper.retrieveAndStoreAccessToken(authCode);
-                }
 
-                // TODO: make this wait until access token is set in shareprefs
-                getProfileFragment();
+                }
             }
         });
 
         mWebView.loadUrl(mOAuthHelper.getAuthCall());
-
-        return view;
-    }
-
-    private void getProfileFragment() {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Fragment fragment = null;
-        try {
-            fragment = ProfileFragment.class.newInstance();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        fragmentTransaction.replace(R.id.fl_content, fragment);
-        fragmentTransaction.commit();
     }
 
 }
