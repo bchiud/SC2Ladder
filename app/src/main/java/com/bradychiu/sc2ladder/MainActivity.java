@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         Fragment fragment = null;
         try {
-            fragment = ProfileFragment.class.newInstance();
+            fragment = AccountFragment.class.newInstance();
         } catch (Exception e) {
             e.printStackTrace();
         }

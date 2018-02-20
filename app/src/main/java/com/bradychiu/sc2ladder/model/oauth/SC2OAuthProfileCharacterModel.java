@@ -16,7 +16,7 @@ import com.squareup.moshi.Moshi;
 @AutoValue
 public abstract class SC2OAuthProfileCharacterModel {
 
-    @Json(name = "id") public abstract Long id();
+    @Json(name = "id") public abstract Integer id();
     @Json(name = "realm") public abstract Integer realm();
     @Json(name = "name") public abstract String name();
     @Json(name = "displayName") public abstract String displayName();
@@ -38,7 +38,7 @@ public abstract class SC2OAuthProfileCharacterModel {
 
     @AutoValue.Builder
     public static abstract class Builder {
-        public abstract Builder setId(Long value);
+        public abstract Builder setId(Integer value);
         public abstract Builder setRealm(Integer value);
         public abstract Builder setName(String value);
         public abstract Builder setDisplayName(String value);

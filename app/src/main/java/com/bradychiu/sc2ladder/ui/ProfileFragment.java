@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bradychiu.sc2ladder.R;
 import com.bradychiu.sc2ladder.api.CommunityOAuthProfileApi;
 import com.bradychiu.sc2ladder.api.SC2CommunityApi;
+import com.bradychiu.sc2ladder.model.oauth.SC2OAuthProfileCharacterModel;
 import com.bradychiu.sc2ladder.model.oauth.SC2OAuthProfileModel;
 import com.bradychiu.sc2ladder.model.profile.ProfileModel;
 import com.bradychiu.sc2ladder.utils.RetrofitUtil;
@@ -30,6 +31,7 @@ public class ProfileFragment extends Fragment {
     private ProfileModel mProfile;
     private Retrofit mRetrofit;
     private SharedPrefsService mSharedPrefsService;
+    private SC2OAuthProfileModel mSC2OAuthProfileModel;
     private TextView mTextView;
 
     @Override
@@ -56,71 +58,36 @@ public class ProfileFragment extends Fragment {
     }
 
     private void getProfile() {
-        SC2CommunityApi sc2CommunityApi = mRetrofit.create(SC2CommunityApi.class);
+        CommunityOAuthProfileApi communityOAuthProfileApi = mRetrofit.create(CommunityOAuthProfileApi.class);
 
-        Call<ProfileModel> profileCall = sc2CommunityApi.getProfile(
-                mSharedPrefsService.getGame(),
-                mSharedPrefsService.getProfileNumber(),
-                mSharedPrefsService.getProfileName(),
-                mSharedPrefsService.getRealmNumber(),
-                mSharedPrefsService.getLocale(),
-                mSharedPrefsService.getApiKey());
+        Call<SC2OAuthProfileModel> sc2OAuthProfileModelCall = communityOAuthProfileApi.getSC2OAuthProfile(
+                mSharedPrefsService.getAccessToken());
 
-        profileCall.enqueue(new Callback<ProfileModel>() {
+        sc2OAuthProfileModelCall.enqueue(new Callback<SC2OAuthProfileModel>() {
+
             @Override
-            public void onResponse(Call<ProfileModel> call, Response<ProfileModel> response) {
-                if (response.isSuccessful()) {
-                    mProfile = response.body();
+            public void onResponse(Call<SC2OAuthProfileModel> call, Response<SC2OAuthProfileModel> response) {
+                if(response.isSuccessful()) {
+                    mSC2OAuthProfileModel = response.body();
 
-                    StringBuilder sbPlayerName = new StringBuilder();
-                    if(!TextUtils.isEmpty(mProfile.clanTag())) sbPlayerName.append("[" + mProfile.clanTag() + "]");
-                    sbPlayerName.append(mProfile.displayName());
-                    mTextView.append("Player: " + sbPlayerName.toString() + "\n");
+                    SC2OAuthProfileCharacterModel firstPlayer = mSC2OAuthProfileModel.characters().get(0);
 
-                    mTextView.append("Highest 1v1 Rank: " + mProfile.career().highest1v1Rank() + "\n");
-
-                    mTextView.append("Highest Team Rank: " + mProfile.career().highestTeamRank() + "\n");
-
-                    mTextView.append("Season Games: " + mProfile.career().seasonTotalGames() + "\n");
-
-                    mTextView.append("Career Games: " + mProfile.career().careerTotalGames() + "\n");
-
+                    mTextView.append("Player: " + firstPlayer.displayName() + "\n");
+                    mTextView.append("Highest 1v1 Rank: " + firstPlayer.career().highest1v1Rank() + "\n");
+                    mTextView.append("Highest Team Rank: " + firstPlayer.career().highestTeamRank() + "\n");
+                    mTextView.append("Season Games: " + firstPlayer.career().seasonTotalGames() + "\n");
+                    mTextView.append("Career Games: " + firstPlayer.career().careerTotalGames() + "\n");
                 } else {
                     //TODO: error response, no access to resource?
                 }
             }
 
             @Override
-            public void onFailure(Call<ProfileModel> call, Throwable t) {
+            public void onFailure(Call<SC2OAuthProfileModel> call, Throwable throwable) {
                 //TODO: something went completely south (like no internet connection)
-                Log.d("Error", t.getMessage());
+                Log.d("Error", throwable.getMessage());
             }
         });
     }
-
-    // private void getOAuthSC2Profile() {
-    //     CommunityOAuthProfileApi communityOAuthProfileApi = mRetrofit.create(CommunityOAuthProfileApi.class);
-    //
-    //     Call<SC2OAuthProfileModel> sc2OAuthProfileModelCall = communityOAuthProfileApi.getSC2OAuthProfile(
-    //             mSharedPrefsService.getAccessToken());
-    //
-    //     sc2OAuthProfileModelCall.enqueue(new Callback<SC2OAuthProfileModel>() {
-    //
-    //         @Override
-    //         public void onResponse(Call<SC2OAuthProfileModel> call, Response<SC2OAuthProfileModel> response) {
-    //             if(response.isSuccessful()) {
-    //                 mTextView.setText(response.body().toString());
-    //             } else {
-    //                 //TODO: error response, no access to resource?
-    //             }
-    //         }
-    //
-    //         @Override
-    //         public void onFailure(Call<SC2OAuthProfileModel> call, Throwable t) {
-    //             //TODO: something went completely south (like no internet connection)
-    //             Log.d("Error", t.getMessage());
-    //         }
-    //     });
-    // }
 
 }

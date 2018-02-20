@@ -4,11 +4,8 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Toast;
 import com.bradychiu.sc2ladder.R;
 import com.bradychiu.sc2ladder.model.drawer.DrawerItemModel;
 import com.bradychiu.sc2ladder.utils.DrawerAdapter;
@@ -30,6 +27,10 @@ public class NavigationDrawer implements DrawerAdapter.DrawerItemClickListener {
 
         mDrawerItemList = new ArrayList<>();
         mDrawerItemList.add(DrawerItemModel.builder()
+                .setIcon(R.mipmap.house)
+                .setTitle("Account")
+                .build());
+        mDrawerItemList.add(DrawerItemModel.builder()
                 .setIcon(R.mipmap.profle)
                 .setTitle("Profile")
                 .build());
@@ -44,10 +45,6 @@ public class NavigationDrawer implements DrawerAdapter.DrawerItemClickListener {
         mDrawerItemList.add(DrawerItemModel.builder()
                 .setIcon(R.mipmap.settings)
                 .setTitle("Settings")
-                .build());
-        mDrawerItemList.add(DrawerItemModel.builder()
-                .setIcon(R.mipmap.house)
-                .setTitle("Account")
                 .build());
 
         RecyclerView mRecyclerView = (RecyclerView) mActivity.findViewById(R.id.rv_drawer);
