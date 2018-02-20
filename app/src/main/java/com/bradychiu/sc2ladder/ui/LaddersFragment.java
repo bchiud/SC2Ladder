@@ -44,7 +44,9 @@ public class LaddersFragment extends Fragment {
         Call<LaddersModel> laddersModelCall = sc2CommunityApi.getLadders(sharedPrefsService.getGame(),
                 sharedPrefsService.getProfileNumber(),
                 sharedPrefsService.getRealmNumber(),
-                sharedPrefsService.getProfileName());
+                sharedPrefsService.getProfileName(),
+                sharedPrefsService.getLocale(),
+                sharedPrefsService.getApiKey());
 
         laddersModelCall.enqueue(new Callback<LaddersModel>() {
             @Override

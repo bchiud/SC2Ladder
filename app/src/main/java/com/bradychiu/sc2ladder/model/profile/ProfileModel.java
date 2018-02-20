@@ -1,7 +1,9 @@
 package com.bradychiu.sc2ladder.model.profile;
 
 import android.os.Parcelable;
+import com.bradychiu.sc2ladder.model.common.CareerModel;
 import com.bradychiu.sc2ladder.model.common.IconModel;
+import com.bradychiu.sc2ladder.model.common.SwarmLevelsModel;
 import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;

@@ -8,9 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.TextView;
 import com.bradychiu.sc2ladder.R;
+import com.bradychiu.sc2ladder.api.CommunityOAuthProfileApi;
 import com.bradychiu.sc2ladder.api.SC2CommunityApi;
+import com.bradychiu.sc2ladder.model.oauth.SC2OAuthProfileModel;
 import com.bradychiu.sc2ladder.model.profile.ProfileModel;
 import com.bradychiu.sc2ladder.utils.RetrofitUtil;
 import com.bradychiu.sc2ladder.utils.SharedPrefsService;
@@ -25,6 +28,8 @@ public class ProfileFragment extends Fragment {
 
     private Context mContext;
     private ProfileModel mProfile;
+    private Retrofit mRetrofit;
+    private SharedPrefsService mSharedPrefsService;
     private TextView mTextView;
 
     @Override
@@ -40,14 +45,26 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPrefsService sharedPrefsService = SharedPrefsService.getInstance(mContext);
-        Retrofit retrofit = RetrofitUtil.getRetrofit(mContext);
-        SC2CommunityApi sc2CommunityApi = retrofit.create(SC2CommunityApi.class);
+        mSharedPrefsService = SharedPrefsService.getInstance(mContext);
+        mRetrofit = RetrofitUtil.getRetrofit(mContext);
 
-        Call<ProfileModel> profileCall = sc2CommunityApi.getProfile(sharedPrefsService.getGame(),
-                sharedPrefsService.getProfileNumber(),
-                sharedPrefsService.getProfileName(),
-                sharedPrefsService.getRealmNumber());
+        getProfile();
+    }
+
+    public void setText(String text) {
+        mTextView.setText(text);
+    }
+
+    private void getProfile() {
+        SC2CommunityApi sc2CommunityApi = mRetrofit.create(SC2CommunityApi.class);
+
+        Call<ProfileModel> profileCall = sc2CommunityApi.getProfile(
+                mSharedPrefsService.getGame(),
+                mSharedPrefsService.getProfileNumber(),
+                mSharedPrefsService.getProfileName(),
+                mSharedPrefsService.getRealmNumber(),
+                mSharedPrefsService.getLocale(),
+                mSharedPrefsService.getApiKey());
 
         profileCall.enqueue(new Callback<ProfileModel>() {
             @Override
@@ -67,6 +84,7 @@ public class ProfileFragment extends Fragment {
                     mTextView.append("Season Games: " + mProfile.career().seasonTotalGames() + "\n");
 
                     mTextView.append("Career Games: " + mProfile.career().careerTotalGames() + "\n");
+
                 } else {
                     //TODO: error response, no access to resource?
                 }
@@ -80,8 +98,29 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    public void setText(String text) {
-        mTextView.setText(text);
-    }
+    // private void getOAuthSC2Profile() {
+    //     CommunityOAuthProfileApi communityOAuthProfileApi = mRetrofit.create(CommunityOAuthProfileApi.class);
+    //
+    //     Call<SC2OAuthProfileModel> sc2OAuthProfileModelCall = communityOAuthProfileApi.getSC2OAuthProfile(
+    //             mSharedPrefsService.getAccessToken());
+    //
+    //     sc2OAuthProfileModelCall.enqueue(new Callback<SC2OAuthProfileModel>() {
+    //
+    //         @Override
+    //         public void onResponse(Call<SC2OAuthProfileModel> call, Response<SC2OAuthProfileModel> response) {
+    //             if(response.isSuccessful()) {
+    //                 mTextView.setText(response.body().toString());
+    //             } else {
+    //                 //TODO: error response, no access to resource?
+    //             }
+    //         }
+    //
+    //         @Override
+    //         public void onFailure(Call<SC2OAuthProfileModel> call, Throwable t) {
+    //             //TODO: something went completely south (like no internet connection)
+    //             Log.d("Error", t.getMessage());
+    //         }
+    //     });
+    // }
 
 }

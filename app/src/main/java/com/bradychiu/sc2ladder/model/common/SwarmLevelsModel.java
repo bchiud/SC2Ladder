@@ -1,4 +1,4 @@
-package com.bradychiu.sc2ladder.model.profile;
+package com.bradychiu.sc2ladder.model.common;
 
 import android.os.Parcelable;
 import com.google.auto.value.AutoValue;
@@ -15,7 +15,7 @@ public abstract class SwarmLevelsModel implements Parcelable {
     @Json(name = "protoss") public abstract SwarmLevelsRaceModel protoss();
 
     public static Builder build() {
-        return new AutoValue_SwarmLevelsModel.Builder();
+        return new $$AutoValue_SwarmLevelsModel.Builder();
     }
 
     @AutoValue.Builder
@@ -28,7 +28,7 @@ public abstract class SwarmLevelsModel implements Parcelable {
     }
 
     public static JsonAdapter<SwarmLevelsModel> jsonAdapter(Moshi moshi) {
-        return new AutoValue_SwarmLevelsModel.MoshiJsonAdapter(moshi);
+        return new $AutoValue_SwarmLevelsModel.MoshiJsonAdapter(moshi);
     }
 
 }

@@ -68,7 +68,9 @@ public class MatchHistoryFragment extends Fragment {
         Call<MatchHistoryModel> matchHistoryCall = sc2CommunityApi.getMatchHistory(sharedPrefsService.getGame(),
                 sharedPrefsService.getProfileNumber(),
                 sharedPrefsService.getRealmNumber(),
-                sharedPrefsService.getProfileName());
+                sharedPrefsService.getProfileName(),
+                sharedPrefsService.getLocale(),
+                sharedPrefsService.getApiKey());
 
         matchHistoryCall.enqueue(new Callback<MatchHistoryModel>() {
 

@@ -19,7 +19,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
+    }
 }
+
+
 
 dependencies {
 
@@ -63,5 +68,11 @@ dependencies {
 
     // design support
     compile 'com.android.support:design:27.0.2'
+
+    // oauth2
+    compile ('com.google.api-client:google-api-client:1.23.0')  {
+        exclude module: 'httpcore'
+        exclude module: 'httpclient'
+    }
 
 }

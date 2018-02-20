@@ -1,12 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cl_settings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <TextView
-            android:id="@+id/tv_settings"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Settings"/>
+            android:id="@+id/tv_settings_title"
+            android:text="Account Settings"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:layout_height="50dp"
+            android:layout_width="344dp"
+            app:layout_constraintStart_toStartOf="@id/cl_settings"/>
 
-</LinearLayout>
+    <TextView
+            android:id="@+id/tv_settings_profile_name"
+            android:text="Profile Name"
+            android:layout_height="50dp"
+            android:layout_width="100dp"
+            android:gravity="center_horizontal|center"
+            app:layout_constraintTop_toBottomOf="@+id/tv_settings_title"
+            app:layout_constraintBottom_toTopOf="@+id/tv_settings_profile_number"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <EditText
+            android:id="@+id/et_settings_profile_name"
+            android:text="Settings 1 EditText"
+            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:gravity="left|bottom"
+            app:layout_constraintTop_toBottomOf="@+id/tv_settings_title"
+            app:layout_constraintBottom_toTopOf="@+id/et_settings_profile_number"
+            app:layout_constraintLeft_toRightOf="@id/tv_settings_profile_name"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+            android:id="@+id/tv_settings_profile_number"
+            android:text="Profile Number"
+            android:layout_height="50dp"
+            android:layout_width="100dp"
+            android:gravity="center_horizontal|center"
+            app:layout_constraintTop_toBottomOf="@+id/tv_settings_profile_name"
+            app:layout_constraintBottom_toTopOf="@+id/et_settings_region"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <EditText
+            android:id="@+id/et_settings_profile_number"
+            android:text="Settings 2 EditText"
+            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:gravity="left|bottom"
+            app:layout_constraintTop_toBottomOf="@+id/et_settings_profile_name"
+            app:layout_constraintBottom_toTopOf="@+id/et_settings_region"
+            app:layout_constraintLeft_toRightOf="@id/tv_settings_profile_number"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+            android:id="@+id/tv_settings_region"
+            android:text="Region"
+            android:layout_height="50dp"
+            android:layout_width="100dp"
+            android:gravity="center_horizontal|center"
+            app:layout_constraintTop_toBottomOf="@+id/tv_settings_profile_number"
+            app:layout_constraintBottom_toTopOf="@+id/tv_settings_4"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <EditText
+            android:id="@+id/et_settings_region"
+            android:text="Settings 3 EditText"
+            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:gravity="left|bottom"
+            app:layout_constraintTop_toBottomOf="@+id/et_settings_profile_number"
+            app:layout_constraintBottom_toTopOf="@+id/et_settings_4"
+            app:layout_constraintLeft_toRightOf="@id/tv_settings_region"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+            android:id="@+id/tv_settings_4"
+            android:text="Settings 4 TextView"
+            android:layout_height="50dp"
+            android:layout_width="100dp"
+            android:gravity="center_horizontal|center"
+            app:layout_constraintTop_toBottomOf="@+id/tv_settings_region"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <EditText
+            android:id="@+id/et_settings_4"
+            android:text="Settings 4 EditText"
+            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:gravity="left|bottom"
+            app:layout_constraintTop_toBottomOf="@+id/et_settings_region"
+            app:layout_constraintLeft_toRightOf="@id/tv_settings_4"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>

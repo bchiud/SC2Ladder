@@ -1,4 +1,4 @@
-package com.bradychiu.sc2ladder.model.profile;
+package com.bradychiu.sc2ladder.model.common;
 
 import android.os.Parcelable;
 import com.google.auto.value.AutoValue;
@@ -36,7 +36,7 @@ public abstract class CareerModel implements Parcelable {
     }
 
     public static JsonAdapter<CareerModel> jsonAdapter(Moshi moshi) {
-        return new AutoValue_CareerModel.MoshiJsonAdapter(moshi);
+        return new $AutoValue_CareerModel.MoshiJsonAdapter(moshi);
     }
 
 }

@@ -45,6 +45,10 @@ public class NavigationDrawer implements DrawerAdapter.DrawerItemClickListener {
                 .setIcon(R.mipmap.settings)
                 .setTitle("Settings")
                 .build());
+        mDrawerItemList.add(DrawerItemModel.builder()
+                .setIcon(R.mipmap.house)
+                .setTitle("Account")
+                .build());
 
         RecyclerView mRecyclerView = (RecyclerView) mActivity.findViewById(R.id.rv_drawer);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
@@ -69,6 +73,9 @@ public class NavigationDrawer implements DrawerAdapter.DrawerItemClickListener {
                     break;
                 case "Settings":
                     fragment = SettingsFragment.class.newInstance();
+                    break;
+                case "Account":
+                    fragment = AccountFragment.class.newInstance();
                     break;
             }
         } catch (Exception e) {
