@@ -71,8 +71,12 @@ dependencies {
 
     // oauth2
     compile ('com.google.api-client:google-api-client:1.23.0')  {
+        exclude group: 'com.google.guava'
         exclude module: 'httpcore'
         exclude module: 'httpclient'
     }
+
+    // event bus
+    compile 'org.greenrobot:eventbus:3.1.1'
 
 }

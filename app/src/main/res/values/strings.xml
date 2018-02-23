@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">SC2 Ladder</string>
 
+    <string name="player_1_id">1524566</string>
+    <string name="player_1_name">soO</string>
+    <string name="player_1_region">kr</string>
+
+    <string name="player_2_id">4263849</string>
+    <string name="player_2_name">LiquidTLO</string>
+    <string name="player_2_region">us</string>
+
 </resources>

@@ -72,7 +72,7 @@ public class NavigationDrawer implements DrawerAdapter.DrawerItemClickListener {
                     fragment = SettingsFragment.class.newInstance();
                     break;
                 case "Account":
-                    fragment = AccountFragment.class.newInstance();
+                    fragment = LoginFragment.class.newInstance();
                     break;
             }
         } catch (Exception e) {

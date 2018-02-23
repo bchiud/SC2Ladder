@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import com.bradychiu.sc2ladder.R;
 import com.bradychiu.sc2ladder.api.CommunityOAuthProfileApi;
+import com.bradychiu.sc2ladder.model.common.MessageEvent;
 import com.bradychiu.sc2ladder.model.oauth.SC2OAuthProfileCharacterModel;
 import com.bradychiu.sc2ladder.model.oauth.SC2OAuthProfileModel;
 import com.bradychiu.sc2ladder.ui.ProfileFragment;
@@ -20,6 +21,9 @@ import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import okhttp3.HttpUrl;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,10 +40,12 @@ public class OAuthHelper {
     private Context mContext;
     private static final String REDIRECT_URI = "https://dev.battle.net/";
     private SharedPrefsService mSharedPrefsService;
+    private ProfileService mProfileService;
 
     public OAuthHelper(Context context) {
         mContext = context;
         mSharedPrefsService = SharedPrefsService.getInstance(mContext);
+        EventBus.getDefault().register(this);
     }
 
     private void setupAuthCodeFlow() {
@@ -69,6 +75,7 @@ public class OAuthHelper {
         accessToken.execute();
     }
 
+    // TODO: can redo this in retrofit
     public class AccessToken extends AsyncTask<Void, Void, TokenResponse> {
 
         private AuthorizationCodeFlow authorizationCodeFlow;
@@ -124,33 +131,9 @@ public class OAuthHelper {
     }
 
     public void updateProfileSharedPrefs () {
-        Retrofit retrofit = RetrofitUtil.getRetrofit(mContext);
-        CommunityOAuthProfileApi communityOAuthProfileApi = retrofit.create(CommunityOAuthProfileApi.class);
-        Call<SC2OAuthProfileModel> sc2OAuthProfileModelCall = communityOAuthProfileApi.getSC2OAuthProfile(mSharedPrefsService.getAccessToken());
-
-        sc2OAuthProfileModelCall.enqueue(new Callback<SC2OAuthProfileModel>() {
-            @Override
-            public void onResponse(Call<SC2OAuthProfileModel> call, Response<SC2OAuthProfileModel> response) {
-                if(response.isSuccessful()) {
-                    SC2OAuthProfileCharacterModel firstCharacter = response.body().characters().get(0);
-
-                    mSharedPrefsService.setProfileNumber(firstCharacter.id());
-                    mSharedPrefsService.setProfileName(firstCharacter.displayName());
-                    mSharedPrefsService.setRealmNumber(firstCharacter.realm());
-
-                    getProfileFragment();
-
-                } else {
-                    // TODO: error response, no access to resource?
-                }
-            }
-
-            @Override
-            public void onFailure(Call<SC2OAuthProfileModel> call, Throwable throwable) {
-                // TODO: something went completely south (like no internet connection)
-                Log.d("Error", throwable.getMessage());
-            }
-        });
+        mProfileService = ProfileService.getInstance(mContext);
+        mProfileService.requestProfile();
+        // eventbus will
     }
 
     public void getProfileFragment() {
@@ -165,5 +148,22 @@ public class OAuthHelper {
         fragmentTransaction.replace(R.id.fl_content, fragment);
         fragmentTransaction.commit();
     }
+
+    // TODO: event bus thread mode?
+    // TODO: different message payloads or different message classes?
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    public void onMessageEvent(MessageEvent event) {
+        if(event.message == "Profile Returned") {
+            SC2OAuthProfileModel sc2OAuthProfileModel = mProfileService.getProfile();
+            SC2OAuthProfileCharacterModel firstCharacter = sc2OAuthProfileModel.characters().get(0);
+
+            mSharedPrefsService.setProfileNumber(firstCharacter.id());
+            mSharedPrefsService.setProfileName(firstCharacter.displayName());
+            mSharedPrefsService.setRealmNumber(firstCharacter.realm());
+
+            getProfileFragment();
+        }
+
+    };
 
 }

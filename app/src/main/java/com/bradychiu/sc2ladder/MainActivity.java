@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.bradychiu.sc2ladder.ui.*;
 import com.bradychiu.sc2ladder.utils.SharedPrefsService;
+import com.google.common.eventbus.EventBus;
 
 public class MainActivity extends AppCompatActivity {
 
